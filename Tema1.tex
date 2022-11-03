@@ -1,0 +1,131 @@
+ \documentclass[12pt] {fphw}
+
+% Template-specific packages
+ 
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage{mathpazo} % Use the Palatino font
+
+\usepackage{graphicx} % Required for including images
+
+\usepackage{booktabs} % Required for better horizontal rules in tables
+
+\usepackage{listings} % Required for insertion of code
+
+\usepackage{enumerate} % To modify the enumerate environment
+\usepackage{subcaption}
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Tema 1} % Assignment title
+
+\author{Bodnari Alina-Florina 2A4, Ungurean Ana-Maria 2A4 } % Student name
+\date{4 Noiembrie 2022} % Due date
+\institute{Universitatea Alexandru Ioan-Cuza \\ Facultatea de Informatică} % Institute or school name
+\class{Algorimica Grafurilor} % Course or class name
+\professor{Lect dr. Olariu Florentin - Emanuel} % Professor or teacher in charge of the assignment
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the assignment title, created automatically using the information in the custom commands above
+
+%----------------------------------------------------------------------------------------
+%	ASSIGNMENT CONTENT
+%----------------------------------------------------------------------------------------
+
+\section*{Problema 1}
+\subsection*{1. (a)} 
+ 
+Urmărind \textbf{definiția componentei conexe}, putem spune că numărul de componente conexe a lui G este cel puțin numărul de stații de tramvai deoarece două triplete ( ${}start_i, station_i, end_i$) și (${}start_j, station_j, end_j$) sunt adiacente dacă și numai dacă ${}station_i=station_j$ și (${}start_i, end_i$) $\cap$  (${}start_j, end_j$) $\neq$  $\emptyset$ . Astfel, vom avea cel puțin k componente conexe, k fiind numărul de stații.  Fie ${}c_i$, unde 1$\leq$i$\leq$ k, o componentă conexă a grafului G, este reprezentativă pentru ${}station_{i-1}$,
+fiind formată din tripletele care sunt adiacente (tripletele au în comun  ${}station_{i-1}$ 
+și îndeplinesc condiția de intersecție de mai sus). Pe lângă cele k componente conexe, putem avea ${}c_j$,componentă conexă, unde j>k,  pentru cazurile în care  ${}station_i$ se află în  mai multe componente conexe.  
+%----------------------------------------------------------------------------------------
+
+\subsection*{1. (b)}
+
+Știind că \textbf{ $\omega$(G)} reprezintă \textbf{numărul maxim de clică a lui G}, iar \textbf{K-clică} este \textbf{o submulțime de K noduri a grafului G}, care \textbf{induce un graf complet}, putem spune că numărul maxim de tramvaie care se pot găsi în același timp în aceeași stație este  $\omega$(G). Răspunsul este datorat faptului că toate nodurile(tripletele) trebuie să fie adiacente (să aibă muchie între ele) pentru a fi toate în aceeași stație simultan.  
+
+\subsection*{1. (c)}
+Din subpunctul (b) $\Longrightarrow$ că numărul maxim de tramvaie care se pot găsi în același timp în aceeași stație este $\omega$(G), unde $\omega$(G) $\geq$ 1 \\ Observăm că: \\ Pentru  
+$\omega$(G)=3, circuitul indus de lungime maximă este 3. \\ Pentru $\omega$(G)=4, circuitul de lungime maximă este 4, însă conține două corzi $\Longrightarrow$ \textbf { lungimea maximă a unui circuit indus a lui G este 3}. 
+ 
+\begin{figure}[h] % Do not use only [h] in real documents.
+\begin{minipage}[c]{ .3\linewidth}
+\includegraphics [height=4cm]{graph1.png}
+\caption{Graf 3-clică}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\includegraphics [height=4cm]{graph2.png}
+\caption{Graf 4-clică }
+\end{minipage}
+\end{figure}
+
+În graful din figura 2, circuitul de lungime 4 nu este indus, deoarece avem muchiile 1-4 și 2-3, care sunt corzi. 
+
+\subsection*{1. (d)}
+ Vom avea nevoie de o listă dublă înlănțuită, în care memorăm indicele nodului din graf și \textit{visitedNeighbors}, care inițial are doar valori de 0. Alegem să inițializăm variabila \textit{max} cu primul nod din listă. Cât timp lista e nevidă,  $\pi$[\textit{max}]=\textit{i- -}, unde \textit{i}=\textit{n} și adăugăm nodul la mulțimea S, care inițial era vidă. Apoi, eliminăm nodul \textit{max} din lista dublă înlănțuită, operație care se realizează în $\mathcal{O}$(1) (*). Parcurgem lista dublă înlănțuită și creștem cu 1 \textit{visitedNeighbors} a nodurilor care sunt vecine cu \textit{max}. La sfârșit, aleg un nod din listă a cărei valoare \textit{visitedNeighbors} este maximă. \\Astfel, operația * se realizează în $\mathcal{O}$(1) și întreg programul are timpul de execuție $\mathcal{O}$(n+m), deoarece inițializarea lui $\pi$[\textit{v}], \textit{v}$\in$ \textit{V(G)} și formarea listei dublu înlănțuite se realizează în $\mathcal{O}$(n), iar în $\mathcal{O}$(m)
+are loc incrementarea \textit{visitedNeighbors} în listă și căutarea \textit{max}-ului.
+
+\section*{Problema 2}
+\subsection*{2. (a)}
+Observăm că pentru orice digraf al cărui graf suport este complet, ordonarea topologică este unică și gradele interne ale nodurilor sunt distincte două câte două. Nodurile incidente cu arcul \textit{e}$\in$$A^{'}$$\setminus$$A^{"}$ vor fi interschimbate astfel încât  \textit{reverse}($\vec{G'}$, \textit{e}) este tot o orientare aciclică a lui G $\Longleftrightarrow$ gradele interioare ale nodurilor se vor interschimba. Astfel, va rezulta că ordonarea topologică a lui \textit{reverse}($\vec{G'}$, \textit{e}) este o permutare a nodurilor din $\vec{G'}$.
+ 
+\subsection*{2. (b)}
+Observăm că pentru n=1 nu putem avea un ${}K_1$, pentru care să avem 2 orientări aciclice $\vec{K'_1}$  și $\vec{K''_1}$ (pentru că \textit{E}=$\emptyset$)
+$\Longrightarrow$ card( \textit{V}) $\geq$ 2. 
+
+\begin{flushleft}
+\textbf{I.} Caz de Bază: \\
+Fie n=2 :
+
+\begin{figure}[h] % Do not use only [h] in real documents.
+\begin{minipage}[c]{ .3\linewidth}
+\includegraphics [height=3cm]{graph3.png}
+\caption{${}K_2$}
+\end{minipage}\hfill
+\begin{minipage}[c]{.3\linewidth}
+\includegraphics [height=3cm]{graph4.png}
+\caption{$\vec{K'_2}$ }
+\end{minipage}\hfill
+\begin{minipage}[c]{ .3\linewidth}
+\includegraphics [height=3cm]{graph5.png}
+\caption {$\vec{K''_2}$}
+\end{minipage}
+\end{figure}
+
+Orientarea aciclică din figura 5 a fost determinată prin aplicarea \textit{reverse}($\vec{K'_2}$, \textit{ab}) o singură dată.  \textbf{"A"} 
+\end {flushleft}
+
+\begin{flushleft}
+\textbf{II.} Presupunem P(k) adevărat, unde P(k): {$\vec{K'_k}$} poate fi transformat în  {$\vec{K''_k}$} prin aplicări repetate ale operației \textit{reverse}. 
+
+Știm că {$K_k$} are $\frac{k(k-1)}{2}$ muchii (graf complet) $\Longrightarrow$
+{$\vec{K'_k}$} și {$\vec{K''_k}$} au $\frac{k(k-1)}{2}$ muchii.  \\
+$\Longrightarrow$ {$\vec{K'_k}$} și {$\vec{K''_k}$} au cel mult k-1 muchii în comun (deoarce {$\vec{K'_k}$} și {$\vec{K''_k}$}  sunt distincte și nu trebuie să aibă circuite) \\
+Determinăm numărul maxim de muchii distincte
+$\frac{k(k-1)}{2}$ - \textit{(k-1)} = $\frac{k(k-1)- 2k+2}{2}$ = $\frac{k^2-k-2k+2}{2}$ =$\frac{k^2-k-2(k-1)}{2}$= $\frac{k(k-1)-2(k-1)}{2}$ = $\frac{(k-1)(k-2)}{2}$ \\
+$\Longrightarrow$ Putem aplica operația \textit{reverse} de maxim $\frac{(k-1)(k-2)}{2}$ ori . \textbf{"A"} 
+\end {flushleft}
+
+\begin{flushleft}
+\textbf{III.}  Demonstrăm: P(k+1) adevărat, unde P(k+1): {$\vec{K'_{k+1}}$} poate fi transformat în  {$\vec{K''_{k+1}}$} prin aplicări repetate ale operației \textit{reverse}. P(k+1) : $\frac{(k)(k-1)}{2}$ ori \\
+
+Știm că {$K_{k+1}$} are $\frac{k(k-1)}{2}$ + \textit{(k-1)} muchii  $\Longrightarrow$
+{$\vec{K'_{k+1}}$} și {$\vec{K''_{k+1}}$} au $\frac{k(k-1)}{2}$ + \textit{(k-1)} muchii.  \\
+$\Longrightarrow$ {$\vec{K'_k}$} și {$\vec{K''_k}$} au cel mult k muchii în comun \\
+Determinăm numărul maxim de muchii distincte
+$\frac{k(k-1)}{2}$ + \textit{(k-1)} - \textit{k} = $\frac{k^2-k+2k-2-2k}{2}$ =$\frac{k^2-k+2}{2}$= $\frac{k^2-3k-2+2k}{2}$ =  $\frac{k^2-3k-2}{2}$ + $\frac{2k}{2}$ = $\frac{(k-1)(k-2)}{2}$ + \textit{k} = P(k) + \textit{k} \\
+$\Longrightarrow$ P(k+1) adevărat
+$\Longrightarrow$ Putem aplica operația \textit{reverse} de maxim $\frac{(k-1)(k-2)}{2}$ + \textit{k} ori .  \\
+
+$\Longrightarrow$ {$\vec{K'_n}$} poate fi transformat în {$\vec{K''_n}$} prin aplicări repetate ale operației  \textit{reverse}. 
+
+\end {flushleft}
+
+
+
+\end{document}
