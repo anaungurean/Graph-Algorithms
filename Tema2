@@ -1,0 +1,59 @@
+ \documentclass[12pt] {fphw}
+%Compilarea se face pdfLaTeX+MakeIndex+BibTeX
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}  
+\usepackage{mathpazo}  
+\usepackage{graphicx}  
+\usepackage{booktabs} 
+\usepackage{listings}  
+\usepackage{enumerate}  
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+ 
+
+\title{Tema 2}  
+\author{Chirila Gabriela-Valentina 2A4, Ungurean Ana-Maria 2A4 } % Student name
+\date{18 Noiembrie 2022} % Due date
+\institute{Universitatea Alexandru Ioan-Cuza \\ Facultatea de Informatică} % Institute or school name
+\class{Algorimica Grafurilor} % Course or class name
+\professor{Lect dr. Olariu Florentin - Emanuel} % Professor or teacher in charge of the assignment
+
+\begin{document}
+
+\maketitle 
+
+\section*{Problema 1}
+\subsection*{1. (a)} 
+   Fie U o partiție de cardinal \textit{p} a lui \textit{V} formată din mai multe submulțimi nevide și disjuncte, \textit{  ${}U_{1}$ ,  ${}U_{2}$ ... ${}U_{p}$ }, astfel încât reuniunea lor va fi \textit{V}.  Presupunem prin reducere la absurd că \textit{p}=1 toate nodurile aparțin aceleași partiții cu proprietatea că între oricare două noduri ale acestei partiții  nu avem drum rezultă că graful respectiv nu poate fi conex. 
+Pentru  \textit{p} = 2  vom avea două partiții cu aceași proprietate, însă graful poate fi conex. Știind că \textit{ G = (V,E)} este un graf conex, ajungem la concluzia că valoarea minimă pe care o poate avea  \textit{p} este 2. \\
+  Dat fiind \textit{T} un arbore parțial al lui \textit{ G = (V,E)} obținut prin eliminarea unor muchii din graful G, fiind aciclic și având n noduri și n-1 muchii. Presupunem prin reducere la absurd că \textit{T} conține 
+\textit{p-2} U-muchii. Dar pentru cazul în care  \textit{p} = 2, acest lucru este imposibil deoarece nu putem avea arbore cu 0 U-muchii. Așadar, \textit{T} conține cel puțin \textit{p-1} U-muchii, în cazul în care \textit{p} = 2 vom obține un arbore cu două noduri și o muchie aceea fiind o U-muchie. 
+
+\subsection*{1. (b)} 
+  Dacă \textit{G} are \textit{s} arbori parțiali disjuncți pe muchii înseamnă că muchiile pe care le găsim într-un arbore nu le vom găsi în alt arbore. Ținând cont de demonstrația de la punctul a, știm că un arbore parțial are cel puțin  \textit{p-1} U-muchii, rezultă că în graful  \textit{G} există cel puțin  \textit{s(p-1)}  U-muchii.
+ 
+\section*{Problema 3}
+\subsection*{3. (a)} 
+  Algoritmul lui Kruskal identifică arborele parțial de cost minim dintr-un graf. Acest algoritm constă în ordonarea muchiilor crescător după cost și analizarea lor în această ordine. Dacă la analizare, extremitățile muchiei fac parte din același subarbore, muchia se ignoră, iar dacă extremitățile muchiei fac parte din arbori diferiți, aceștia se vor reuni, iar muchia va face parte din arborele parțial de cost minim. \\
+  1.Știm că  \textit{ ${}e_{1}$}= \textit{  ${}u_{1}$${}v_{1}$} și  \textit{ ${}e_{2}$}= \textit{  ${}u_{2}$${}v_{2}$}, unde  \textit{ ${}v_{1}$}, \textit{ ${}v_{2}$} $\notin$  \textit{ ${}V_{s}$} $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} $\notin$  \textit{ ${}T_{s}$} încă. \\
+  2.Dat fiind faptul că Algoritmul lui Kruskal analizează muchiile în ordinea crescătoare după cost, iar costurile sunt diferite pentru fiecare muchie deoarece funcția \textit{c} este injectivă $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} încă nu au fost analizate deoarece au costul mai mare decât costul muchiilor analizate deja. \\
+Din 1. + 2. $\Rightarrow$  \textit{ ${}c(e_{1}$)}> \textit{ c(e)} și  \textit{ ${}c(e_{2}$)}> \textit{ c(e)}, unde  \textit{e} este o muchie de cost maxim din drumul de la i  \textit{ ${}u_{1}$} la i  \textit{ ${}u_{2}$} în \textit{ ${}T_{s}$},  \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$} $\in$  \textit{ ${}V_{s}$}.
+
+\subsection*{3. (b)} 
+    Algoritmul lui Prim identifică arborele parțial de cost minim dintr-un graf conex ponderat. Acest algoritm constă în alegerea unui nod arbitrar pentru început, iar apoi în mod repetat se alege câte un nod care nu a fost vizitat încă și care are muchie cu unul dintre nodurile deja vizitate, această muchie fiind de cost minim. \\
+    1.Știm că  \textit{ ${}e_{1}$}= \textit{  ${}u_{1}$${}v_{1}$} și  \textit{ ${}e_{2}$}= \textit{  ${}u_{2}$${}v_{2}$}, unde  \textit{ ${}v_{1}$}, \textit{ ${}v_{2}$} $\notin$  \textit{ ${}V_{s}$} $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} $\notin$  \textit{ ${}T_{s}$} încă. \\
+    2. Dat fiind faptul că Algoritmul lui Prim tot alege noduri spre care costul muchiei este minim. După un anumit număr de iterații a buclei while, $\forall$ \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$}  $\in$ \textit{ ${}V_{s}$}, muchia \textit{e} de cost maxim de pe drumul de la  \textit{ ${}u_{1}$} la \textit{ ${}u_{2}$} va fi mai mică cel puțin decât costul unei muchii care pleacă din aceste două noduri spre un nod care $\notin$  \textit{ ${}V_{s}$} deoarece în timpul analizei costurilor muchiilor până în acel moment, am ales costul minim a unei muchii care pleacă dintr-un nod din \textit{ ${}V_{s}$} . Presupunem că  \textit{e}=\textit{ ${}u_{3}$}\textit{ ${}u_{4}$}, \textit{c(e)} poate fi mai mare decât \textit{ ${}c(e_{1})$} sau decât  \textit{ ${}c(e_{2})$} în cazul în care ultimul nod adăugat în  \textit{ ${}V_{s}$} a fost  \textit{ ${}u_{1}$} sau  \textit{ ${}u_{2}$}, neavând șansa să comparăm și costurile muchiilor care pleacă din ultimul nod adăugat. \\
+Din 1. + 2. $\Rightarrow$  \textit{ ${}c(e_{1}$)}> \textit{ c(e)} sau  \textit{ ${}c(e_{2}$)}> \textit{ c(e)}, unde  \textit{e} este o muchie de cost maxim din drumul de la i  \textit{ ${}u_{1}$} la i  \textit{ ${}u_{2}$} în \textit{ ${}T_{s}$},  \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$} $\in$  \textit{ ${}V_{s}$}.
+
+\section*{Problema 4}
+\subsection*{4. (a)} 
+   Presupunem prin reducere la absurd că \textit{ ${}G^{'}$} este un digraf ciclic și are un circuit de forma  \textit{a-b-a}, unde \textit{a,b} $\in$ \textit{ ${}V( G^{'})$}. Așadar, pentru a avea acest circuit avem nevoie de muchia \textit{ab} și muchia \textit{ba}.\\
+   Conform definiției acoperirii prietenești, vom avea:\\
+1. muchia \textit{ab}  $\in$ \textit{ ${}E( G^{'})$} $\Leftrightarrow$ există drum direct de la a la b în \textit{G}\\
+2. muchia \textit{ba}  $\in$ \textit{ ${}E( G^{'})$} $\Leftrightarrow$ există drum direct de la b la a în \textit{G}\\
+Din 1. + 2. $\Rightarrow$  având drum de la a la b și de la b la a în \textit{G} avem un circuit de la a la a $\Rightarrow$ \textit{G} este un digraf ciclic, însă aceast rezultat este o contradicție pentru ipoteaza noastră.  $\Rightarrow$ acoperirea prietenească a unui digraf acicilic este tot un digraf aciclic. 
+
+
+   
+\end{document}
