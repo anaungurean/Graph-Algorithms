@@ -25,14 +25,65 @@
 
 \section*{Problema 1}
 \subsection*{1. (a)} 
-   Fie U o partiție de cardinal \textit{p} a lui \textit{V} formată din mai multe submulțimi nevide și disjuncte, \textit{  ${}U_{1}$ ,  ${}U_{2}$ ... ${}U_{p}$ }, astfel încât reuniunea lor va fi \textit{V}.  Presupunem prin reducere la absurd că \textit{p}=1 toate nodurile aparțin aceleași partiții cu proprietatea că între oricare două noduri ale acestei partiții  nu avem drum rezultă că graful respectiv nu poate fi conex. 
+   Fie $\mathcal{U}$ o partiție de cardinal \textit{p} a lui \textit{V} formată din mai multe submulțimi nevide și disjuncte, \textit{  ${}U_{1}$ ,  ${}U_{2}$ ... ${}U_{p}$ }, astfel încât reuniunea lor va fi \textit{V}.  Presupunem prin reducere la absurd că \textit{p}=1 toate nodurile aparțin aceleași partiții cu proprietatea că între oricare două noduri ale acestei partiții  nu avem drum rezultă că graful respectiv nu poate fi conex. 
 Pentru  \textit{p} = 2  vom avea două partiții cu aceași proprietate, însă graful poate fi conex. Știind că \textit{ G = (V,E)} este un graf conex, ajungem la concluzia că valoarea minimă pe care o poate avea  \textit{p} este 2. \\
   Dat fiind \textit{T} un arbore parțial al lui \textit{ G = (V,E)} obținut prin eliminarea unor muchii din graful G, fiind aciclic și având n noduri și n-1 muchii. Presupunem prin reducere la absurd că \textit{T} conține 
-\textit{p-2} U-muchii. Dar pentru cazul în care  \textit{p} = 2, acest lucru este imposibil deoarece nu putem avea arbore cu 0 U-muchii. Așadar, \textit{T} conține cel puțin \textit{p-1} U-muchii, în cazul în care \textit{p} = 2 vom obține un arbore cu două noduri și o muchie aceea fiind o U-muchie. 
+\textit{p-2} $\mathcal{U}$-muchii . Dar pentru cazul în care  \textit{p} = 2, acest lucru este imposibil deoarece nu putem avea arbore cu 0 $\mathcal{U}$-muchii . Așadar, \textit{T} conține cel puțin 
+\textit{p-1}  $\mathcal{U}$-muchii , în cazul în care \textit{p} = 2 vom obține un arbore cu două noduri și o muchie aceea fiind o  $\mathcal{U}$-muchie. 
+\\
+\\
 
 \subsection*{1. (b)} 
-  Dacă \textit{G} are \textit{s} arbori parțiali disjuncți pe muchii înseamnă că muchiile pe care le găsim într-un arbore nu le vom găsi în alt arbore. Ținând cont de demonstrația de la punctul a, știm că un arbore parțial are cel puțin  \textit{p-1} U-muchii, rezultă că în graful  \textit{G} există cel puțin  \textit{s(p-1)}  U-muchii.
+  Dacă \textit{G} are \textit{s} arbori parțiali disjuncți pe muchii înseamnă că muchiile pe care le găsim într-un arbore nu le vom găsi în alt arbore. Ținând cont de demonstrația de la punctul a, știm că un arbore parțial are cel puțin  \textit{p-1}  $\mathcal{U}$-muchii , rezultă că în graful  \textit{G} există cel puțin  \textit{s(p-1)} $\mathcal{U}$-muchii . 
+\\
+\\
+
+\section*{Problema 2}
+\subsection*{2. (a)} 
+Știm că o muchie backward are orientarea de la strămoși la fii. Inițial, digraful \textit{T} este aciclic, fiind arbore. Fie $\forall$ muchie backward \textit{vu} presupunând că am terminat realizarea orientării tuturor muchiilor backward din graful inițial, această muchie, conform definiției, are orientarea de la părinți la fii $\Rightarrow$ \textit{v} este strămoș a lui \textit{u}. Observăm că se formează exact un ciclu deoarece de la \textit{u} avem drum către \textit{v} (drum format doar din arcele din arbore) dat fiind faptul că în arbore orientarea este de la descendenți la strămoși (un descendent nu poate avea mai mulți strămoși, ci exact unul). $\Rightarrow$ $\forall$ muchie backward \textit{vu}, digraful \textit{T} + \textit{vu} conține exact un circuit direct \textit{  ${}C_{vu}$}. \\
+\\
+\\
+\\
+\\
+\subsection*{2. (b)} 
+Pseudocodul este : \\
+\textit{  \textbf{for} ( i= $\overline{1,n}$) } \\
+\textit { \{ } \\
+\textit{ visited[i] $\leftarrow$ 0 } //considerăm toate nodurile nevizitate \\ 
+\textit{ circuit[i]  $\leftarrow$ $\emptyset$} //circuit[i]- reprezinta toate circuitele din nodul i \\
+\textit { \} } \\
+\textit{  \textbf{for} ( i= $\overline{1,n}$) } \\
+\textit { \{ } \\
+\textit{ nodv  $\leftarrow$ vertex[i] } //în vertex avem nodurile în ordine crescătoare dfs. \\
+\textit{ visited[nodv] $\leftarrow$ 1 } //marcam nodul ca fiind vizitat\\
+\textit{ \textbf{while}( $\epsilon$ $\neq$ $\emptyset$) } //în coada $\epsilon$ avem muchiile backward\\
+\textit { \{ } \\
+\textit{ $\epsilon$[nodv].pop() } \\
+\textit{ nodu  $\leftarrow$ $\epsilon$[nodv].front()} \\
+\textit{ $\epsilon$[nodv].pop() } \\
+\textit { circuit[nodv].push(nodv) } \\
+\textit {  \textbf{if} (visited.[nodu]==0) } \\
+\textit { \{ } \\
+\textit { circuit[nodv].push(nodu) } \\
+\textit { \textbf{while} ( visited[parent[nodu]] == 0) } //adăugăm în coada circuit noduri până la primul nod vizitat \\
+\textit { \{ } \\
+\textit{ circuit[nodv].push(parent[nodu]) } \\
+\textit{ nodu  $\leftarrow$ parent[nodu] } \\
+\textit { \}\}\}\} } \\
  
+După executarea pseudocodului de mai sus, în coada circuit pentru fiecare nod din \textit{G} vom avea circuitele din nodul respectiv, iar toate drumurile din \textit{G} se află în parcurgerea circuitelor. \\
+
+\subsection*{2. (c)}
+În timpul determinării circuitului \textit{  ${}C_{vu}$} ce are loc în bucla \textit { \textbf{while} ( visited[parent[nodu]] == 0) }, vom adăuga în coada circuit nodurile din secvența while, aceste noduri formează un drum sau un circuit începând cu nodul  \textit{v} deoarece prima muchie pe care o adaug este o muchie  backward  de forma \textit{vz}, unde \textit{z } este strămoș a lui \textit{v},  $\Rightarrow$  nodurile pe care le adăugăm ulterior vor forma un drum sau un circuit. 
+ 
+\subsection*{2. (d)}
+Prima legătura este un circuit deoarece presupunând că pornim din nodul \textit{v}, pe parcursul determinării circuitului  \textit{  ${}C_{vu}$} nu vom întâlni un nod vizitat până nu ajungem din nou la \textit{v},dat fiind faptul că  \textit{v} este primul nod vizitat. Astfel, se va determina un circuit ca fiind prima legătură. 
+
+\subsection*{2. (e)}
+Un graf \textit{G} este \textit{p}-conex dacă G nu poate fi deconectat prin ștergerea a mai puțin de p noduri. $\delta$(G) este gradul minim a nodurilor din \textit{G}. \\
+Presupunem prin reducere la absurd că  $\delta$(G) = 1, prin eliminarea unui singur nod, cel care are gradul 1, am putea deconecta graful  $\Rightarrow$ G este \textit{1}-conex $\Rightarrow$ G este \textit{2}-conex, dacă   $\delta$(G) >= 2. \\
+Descompunerea dată conține doar o singură legătură care este circuit, aceasta fiind prima legătură găsită, fapt demonstrat la punctul d) deoarece nu vom găsi o altă legătură care să fie circuit, având în vedere că vom găsi noduri vizitate până să ajungem în nodul din care am plecat. 
+
 \section*{Problema 3}
 \subsection*{3. (a)} 
   Algoritmul lui Kruskal identifică arborele parțial de cost minim dintr-un graf. Acest algoritm constă în ordonarea muchiilor crescător după cost și analizarea lor în această ordine. Dacă la analizare, extremitățile muchiei fac parte din același subarbore, muchia se ignoră, iar dacă extremitățile muchiei fac parte din arbori diferiți, aceștia se vor reuni, iar muchia va face parte din arborele parțial de cost minim. \\
@@ -54,6 +105,37 @@ Din 1. + 2. $\Rightarrow$  \textit{ ${}c(e_{1}$)}> \textit{ c(e)} sau  \textit{ 
 2. muchia \textit{ba}  $\in$ \textit{ ${}E( G^{'})$} $\Leftrightarrow$ există drum direct de la b la a în \textit{G}\\
 Din 1. + 2. $\Rightarrow$  având drum de la a la b și de la b la a în \textit{G} avem un circuit de la a la a $\Rightarrow$ \textit{G} este un digraf ciclic, însă aceast rezultat este o contradicție pentru ipoteaza noastră.  $\Rightarrow$ acoperirea prietenească a unui digraf acicilic este tot un digraf aciclic. 
 
+\subsection*{4. (b)}
+   Știm că o mulțime stabilă este o mulțime formată din noduri neadiacente două câte două. \\ 
+   Demonstrăm că o submulțime de noduri \textit{S} $\subseteq$ \textit{V} este stabilă în  \textit{ ${}G^{'}$} $\Leftrightarrow$ este o adversitate în \textit{G} astfel: \\
+"$\Rightarrow$" :  Știm că \textit{S} este o mulțime stabilă în  \textit{ ${}G^{'}$} și arătăm că este o adversitate în \textit{G}. Dacă \textit{S} este o mulțime stabilă în \textit{ ${}G^{'}$}, atunci nu avem niciun arc de la un nod la alt nod, ambele fiind din \textit{S} $\Rightarrow$ nu avem drum direct între două noduri din  \textit{S} în digraful \textit{G} $\Rightarrow$  \textit{S} este o adversitate în \textit{G}. \\
+"$\Leftarrow$" :  Știm că \textit{S} este o adversitate în \textit{G} și arătăm că este o mulțime stabilă în  \textit{ ${}G^{'}$}. Dacă \textit{S} este o adversitate în \textit{G}, atunci nu avem niciun drum între oricare două noduri , ambele fiind din \textit{S} $\Rightarrow$ nu avem arc între două noduri din \textit{S} în digraful \textit{ ${}G^{'}$} $\Rightarrow$ \textit{S} este o mulțime stabilă în  \textit{ ${}G^{'}$}
+
+\subsection*{4. (c)}
+  Știm că un drum direct simplu este un drum în care arcele nu se repetă. 
+  Demonstrăm că un șir de noduri  \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } din \textit{V} formează un drum direct simplu în  \textit{ ${}G^{'}$}  $\Leftrightarrow$ nodurile se regăsesc (în această ordine, dar nu neapărat consecutive) pe un drum direct simplu în \textit{G} astfel: \\
+"$\Rightarrow$": Știm că \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } din \textit{V} formează un drum direct simplu în  \textit{ ${}G^{'}$} și arătăm că nodurile se regăsesc (în această ordine, dar nu neapărat consecutive) pe un drum direct simplu în \textit{G}. \\
+Fie: \\
+1. \textit{${}x_{1}$}\textit{${}x_{2}$} un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{1}$} la \textit{${}x_{2}$} în \textit{G}\\
+2. \textit{${}x_{2}$}\textit{${}x_{3}$}  un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{2}$} la \textit{${}x_{3}$} în \textit{G}\\
+.\\
+.\\
+.\\
+.\\
+p-1. \textit{${}x_{p-1}$}\textit{${}x_{p}$}  un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{p-1}$} la \textit{${}x_{p}$} în \textit{G}\\
+Din 1+2+...+(p-1) și știind că un drum direct de la un nod la alt nod în \textit{G} conține cel puțin două noduri $\Rightarrow$ există drum direct simplu de la \textit{${}x_{1}$} la \textit{${}x_{p}$} în \textit{G}
+de forma \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } (în această ordine, dar nu neapărat consecutive). \\
+"$\Leftarrow$": Știm că \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } (în această ordine, dar nu neapărat consecutive) este un drum direct simplu în \textit{G} și arătăm că  \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } formează un drum direct simplu în  \textit{ ${}G^{'}$}.  \\
+Fie:  \textit{  ${}x_{n}$ ,  ${}x_{m}$ , ${}x_{t}$ } o succesiune de noduri consecutive din drumul direct simplu dat  $\Rightarrow$ în  \textit{ ${}G^{'}$} vom avea: \\
+1. arcul \textit{  ${}x_{n}$${}x_{m}$} \\
+2. arcul \textit{  ${}x_{m}$${}x_{t}$} \\
+3.  arcul \textit{  ${}x_{n}$${}x_{t}$}   $\Rightarrow$ în \textit{ ${}G^{'}$} putem avea un drum direct simplu mai scurt de la  \textit{  ${}x_{n}$ la ${}x_{t}$}. \\
+$\Rightarrow$ în \textit{ ${}G^{'}$} putem avea un drum direct simplu mai scurt de  la \textit{  ${}x_{1}$ la ${}x_{p}$} decât cel din \textit{G}. 
+
+\subsection*{4. (d)}
+ Demonstrăm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri $\Leftrightarrow$ \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri astfel: \\
+"$\Rightarrow$": Știm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri și arătăm că \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri. Dacă \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri $\Rightarrow$ (folosindu-ne de punctul \textit{c)} ) Nodurile din cele cel  mult \textit{s} drumuri disjuncte din \textit{ ${}G^{'}$} se regăsesc (în această ordine, dar nu neapărat consecutive) în cel mult  \textit{s} drumuri din \textit{G} $\Rightarrow$ \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri. \\
+"$\Leftarrow$": Știm că \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri și arătăm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri. Dacă \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri $\Rightarrow$  în \textit{ ${}G^{'}$} vom avea aceleași și toate drumurile din \textit{G} deoarece \textit{ ${}G^{'}$} se formează din \textit{G} și eventual se mai adaugă arce între nodurile între care există drum în \textit{G} $\Rightarrow$  \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri. \\
 
    
 \end{document}
