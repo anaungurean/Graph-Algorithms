@@ -1,0 +1,149 @@
+ \documentclass[12pt] {fphw}
+%Compilarea se face pdfLaTeX+MakeIndex+BibTeX
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}  
+\usepackage{mathpazo}  
+\usepackage{graphicx}  
+\usepackage{booktabs} 
+\usepackage{listings}  
+\usepackage{enumerate}  
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+ 
+
+\title{Tema 3}  
+\author{Chirila Gabriela-Valentina 2A4, Ungurean Ana-Maria 2A4 } % Student name
+\date{5 Ianuarie 2023} % Due date
+\institute{Universitatea Alexandru Ioan-Cuza \\ Facultatea de Informatică} % Institute or school name
+\class{Algorimica Grafurilor} % Course or class name
+\professor{Lect dr. Olariu Florentin - Emanuel} % Professor or teacher in charge of the assignment
+
+\begin{document}
+
+\maketitle 
+
+\section*{Problema 1}
+\subsection*{1. (a)} 
+      Știm că \textit{M}, \textit{M'} sunt cuplaje $\Rightarrow$ sunt două mulțimi independente de muchii în \textit{G}, unde  \textit{M} $\subseteq$  \textit{E} și \textit{M'} $\subseteq$  \textit{E}, astfel încât $d_{M}$ (v) $\leq$ 1 și $d_{M'}$ (v') $\leq$ 1, $\forall$ v $\in$  \textit{S} și $\forall$ v' $\in$  \textit{T}, iar  \textit{S(M)}, \textit{S(M')} reprezintă mulțimea nodurilor saturate de M, respectiv M'. \\ 
+
+Fie \textit{G'}, graful parțial dat. Mulțimea de noduri \textit{S} $\cup$ \textit{T} reprezintă toate nodurile din \textit{G}, iar mulțimea de muchii \textit{M} $\cup$ \textit{M'} constituie reuniunea muchiilor din cele două cuplaje. \\
+Știm că \textit{G} este un graf bipartit $\Rightarrow$ $\forall$ m $\in$  \textit{E}, va fi incidentă cu un nod din mulțimea \textit{S} și cu un nod din mulțimea \textit{T}, cum \textit{M} $\cup$ \textit{M'} $\subseteq$  \textit{E} $\Rightarrow$ $\forall$ m $\in$ \textit{M} $\cup$ \textit{M'} va fi deasemenea incidentă cu un nod din mulțimea \textit{S} și cu un nod din mulțimea \textit{T}  $\Rightarrow$ nu există muchie între două noduri din \textit{S} sau din \textit{T} $\Rightarrow$ graful parțial \textit{G'} este un \textbf{graf bipartit}, a cărui componente conexe sunt la rândul lor \textbf{grafuri bipartite}. De asemenea, am observăt că în unele cazuri componenetele conexe pot fi formate dintr-un singur nod izolat atunci când în alegerea cuplajelor, nu a fost aleasă nicio muchie care să fie incidentă cu acest nod. 
+
+\subsection*{1. (b)} 
+   Din ipoteză știm că există două cuplaje \textit{M}, \textit{M'} astfel încât \textit{A} $\subseteq$ \textit{S(M)} și  \textit{B} $\subseteq$  \textit{S(M')}, unde \textit{A} $\subseteq$ \textit{S} și  \textit{B} $\subseteq$  \textit{T}. Iar, de la subpunctul a), am aflat că fiecare componentă conexă a grafului parțial dat G' este un graf biparit. \\
+
+Astfel, putem construi un cuplaj $M_{0}$ care să satureze toate nodurile din \textit{A} $\cup$ \textit{B}, prin alegerea muchiilor fie din cuplajul \textit{M}, fie din \textit{M'}, astfel încât muchiile nu să nu aibă noduri în comun. Pentru a ne asigura proprietatea cuplajului, în cazul în care avem două muchii care au în comun un nod, va fi nevoie să o alegem pe cea care are un nod în mulțimea  \textit{A}, iar celălalt din mulțimea \textit{B}. $\Rightarrow$  
+ \textit{A} $\cup$ \textit{B} $\subseteq$ \textit{S($M_{0}$)}, este inclus deoarece în momentul în care construim cuplajele  \textit{M}, \textit{M'} ne putem folosi de muchii care sunt incidente cu noduri care nu sunt nici din mulțimea \textit{A}, nici din mulțimea \textit{B}. 
+
+\section*{Problema 2}
+\subsection*{2. (a)} 
+   Știm că  \textit{$d_{G^{-}}$ (v)} reprezintă numărul de noduri care intră spre nodul \textit{v}, de asemenea definim o mulțime stabilă ca fiind o mulțime independență de noduri pentru care nu există nicio muchie între nodurile sale, iar $\chi$ constituie numărul cromatic, cea mai mică valoare a lui p, asfel încât există o p-colorare, unde  $\chi$ $\leq$ |\textit{G}|. \\
+
+     Fie \textit{x} și \textit{y}  două noduri, unde \textit{x} și \textit{y} $\in$ \textit{$V_{i}$}. Presupunem prin absurd că \textit{x} și \textit{y}  sunt adiacente în graful dat \textit{G}  $\Rightarrow$ în orientarea aciclică {$\vec{G}$}, fie \textit{x} fie \textit{y} va avea gradul interior cel puțin egal cu 1 ( {$d_{G'}^-$} (x) $\geq$ 1 || {$d_{G'}^-$} (y) $\geq$ 1)  $\Rightarrow$   urmărind definiția dată pentru clasele  $V_{i}$ ajungem la o contradicție ( definiția cere ca $\forall$ nod din clasă are gradul interior egal cu 1) $\Rightarrow$ $\forall$ două noduri din $V_{i}$ nu pot fi adiacente între ele $\Rightarrow$ pe baza definiției mulțimi stabile, ajungem la concluzia că toate clasele $V_{i}$ sunt mulțimi stabile în \textit{G}. \\
+
+     Presupunem prin absurd că \textit{p < $\chi$ (G)}, unde \textit{p= c({$\vec{G}$})+1}. Observăm că c({$\vec{G}$}) $\geq$ 1, deoarece cea mai mică valoare pe care o poate lua \textit{c} este 1, atunci când cel mai lung drum direct în {$\vec{G}$} este format dintr-un singur arc $\Rightarrow$  $\chi$ (G) $\geq$ 2 deorece cele două noduri care formează cel mai lung drum vor fi de culori diferite. Cum c({$\vec{G}$}) $\geq$ 1 și $\chi$ (G) $\geq$ 2 
+ $\Rightarrow$ c({$\vec{G}$}) + 1 < $\chi$ (G) contradicție $\Rightarrow$  \textit{p $\geq$ $\chi$ (G)}. 
+ 
+\subsection*{2. (b)} 
+        De la subpunctul a) știm că c({$\vec{G}$}) + 1 $\geq$ $\chi$ (G), iar la subpunctul b) ne se cere să demonstrăm că există o orientare aciclică {$\vec{G}$} astfel încât $\chi$ (G) $\leq$  c({$\vec{G}$}) + 1  $\Rightarrow$ vom demonstra că există o orientare aciclică {$\vec{G}$} astfel încât $\chi$ (G) = c({$\vec{G}$}) + 1. \\
+ 
+        Pornind de la o colorare optimă a nodurilor din \textit{G}, se formează un număr de $\chi$ (G) mulțimi stabile. Construim orientarea acicilică astfel: căutăm subgraful complet cu un număr maxim de noduri, alegem aleatoriu un nod din acel subraf și punem orientarea muchiilor incidente cu el către acel nod, apoi alegem alt nod și procedăm la fel cu muchiile incidente cu acesta a căror orientare nu a fost aleasă încă, repetăm acest pas până când toate muchiile din acel subgraf complet au o orientare. Cu celălalte muchii care nu fac parte din subgraful complet, vom proceda astfel: nodurile incidente cu acestea fie au gradul interior 0, fie au gradul exterior 0. Astfel, ne asigurăm că cel mai lung drum din orientarea aciclică {$\vec{G}$}, va fi de lungime $\chi$ (G) - 1, fiind format din arce din subgraful complet maxim găsit anterior $\Rightarrow$  există o orientare aciclică {$\vec{G}$} astfel încât $\chi$ (G) = c({$\vec{G}$}) + 1 .
+
+ 
+
+
+\subsection*{2. (b)} 
+Pseudocodul este : \\
+\textit{  \textbf{for} ( i= $\overline{1,n}$) } \\
+\textit { \{ } \\
+\textit{ visited[i] $\leftarrow$ 0 } //considerăm toate nodurile nevizitate \\ 
+\textit{ circuit[i]  $\leftarrow$ $\emptyset$} //circuit[i]- reprezinta toate circuitele din nodul i \\
+\textit { \} } \\
+\textit{  \textbf{for} ( i= $\overline{1,n}$) } \\
+\textit { \{ } \\
+\textit{ nodv  $\leftarrow$ vertex[i] } //în vertex avem nodurile în ordine crescătoare dfs. \\
+\textit{ visited[nodv] $\leftarrow$ 1 } //marcam nodul ca fiind vizitat\\
+\textit{ \textbf{while}( $\epsilon$ $\neq$ $\emptyset$) } //în coada $\epsilon$ avem muchiile backward\\
+\textit { \{ } \\
+\textit{ $\epsilon$[nodv].pop() } \\
+\textit{ nodu  $\leftarrow$ $\epsilon$[nodv].front()} \\
+\textit{ $\epsilon$[nodv].pop() } \\
+\textit { circuit[nodv].push(nodv) } \\
+\textit {  \textbf{if} (visited.[nodu]==0) } \\
+\textit { \{ } \\
+\textit { circuit[nodv].push(nodu) } \\
+\textit { \textbf{while} ( visited[parent[nodu]] == 0) } //adăugăm în coada circuit noduri până la primul nod vizitat \\
+\textit { \{ } \\
+\textit{ circuit[nodv].push(parent[nodu]) } \\
+\textit{ nodu  $\leftarrow$ parent[nodu] } \\
+\textit { \}\}\}\} } \\
+ 
+După executarea pseudocodului de mai sus, în coada circuit pentru fiecare nod din \textit{G} vom avea circuitele din nodul respectiv, iar toate drumurile din \textit{G} se află în parcurgerea circuitelor. \\
+
+\subsection*{2. (c)}
+În timpul determinării circuitului \textit{  ${}C_{vu}$} ce are loc în bucla \textit { \textbf{while} ( visited[parent[nodu]] == 0) }, vom adăuga în coada circuit nodurile din secvența while, aceste noduri formează un drum sau un circuit începând cu nodul  \textit{v} deoarece prima muchie pe care o adaug este o muchie  backward  de forma \textit{vz}, unde \textit{z } este strămoș a lui \textit{v},  $\Rightarrow$  nodurile pe care le adăugăm ulterior vor forma un drum sau un circuit. 
+ 
+\subsection*{2. (d)}
+Prima legătura este un circuit deoarece presupunând că pornim din nodul \textit{v}, pe parcursul determinării circuitului  \textit{  ${}C_{vu}$} nu vom întâlni un nod vizitat până nu ajungem din nou la \textit{v},dat fiind faptul că  \textit{v} este primul nod vizitat. Astfel, se va determina un circuit ca fiind prima legătură. 
+
+\subsection*{2. (e)}
+Un graf \textit{G} este \textit{p}-conex dacă G nu poate fi deconectat prin ștergerea a mai puțin de p noduri. $\delta$(G) este gradul minim a nodurilor din \textit{G}. \\
+Presupunem prin reducere la absurd că  $\delta$(G) = 1, prin eliminarea unui singur nod, cel care are gradul 1, am putea deconecta graful  $\Rightarrow$ G este \textit{1}-conex $\Rightarrow$ G este \textit{2}-conex, dacă   $\delta$(G) >= 2. \\
+Descompunerea dată conține doar o singură legătură care este circuit, aceasta fiind prima legătură găsită, fapt demonstrat la punctul d) deoarece nu vom găsi o altă legătură care să fie circuit, având în vedere că vom găsi noduri vizitate până să ajungem în nodul din care am plecat. 
+
+\section*{Problema 3}
+\subsection*{3. (a)} 
+  Algoritmul lui Kruskal identifică arborele parțial de cost minim dintr-un graf. Acest algoritm constă în ordonarea muchiilor crescător după cost și analizarea lor în această ordine. Dacă la analizare, extremitățile muchiei fac parte din același subarbore, muchia se ignoră, iar dacă extremitățile muchiei fac parte din arbori diferiți, aceștia se vor reuni, iar muchia va face parte din arborele parțial de cost minim. \\
+  1.Știm că  \textit{ ${}e_{1}$}= \textit{  ${}u_{1}$${}v_{1}$} și  \textit{ ${}e_{2}$}= \textit{  ${}u_{2}$${}v_{2}$}, unde  \textit{ ${}v_{1}$}, \textit{ ${}v_{2}$} $\notin$  \textit{ ${}V_{s}$} $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} $\notin$  \textit{ ${}T_{s}$} încă. \\
+  2.Dat fiind faptul că Algoritmul lui Kruskal analizează muchiile în ordinea crescătoare după cost, iar costurile sunt diferite pentru fiecare muchie deoarece funcția \textit{c} este injectivă $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} încă nu au fost analizate deoarece au costul mai mare decât costul muchiilor analizate deja. \\
+Din 1. + 2. $\Rightarrow$  \textit{ ${}c(e_{1}$)}> \textit{ c(e)} și  \textit{ ${}c(e_{2}$)}> \textit{ c(e)}, unde  \textit{e} este o muchie de cost maxim din drumul de la i  \textit{ ${}u_{1}$} la i  \textit{ ${}u_{2}$} în \textit{ ${}T_{s}$},  \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$} $\in$  \textit{ ${}V_{s}$}.
+
+\subsection*{3. (b)} 
+    Algoritmul lui Prim identifică arborele parțial de cost minim dintr-un graf conex ponderat. Acest algoritm constă în alegerea unui nod arbitrar pentru început, iar apoi în mod repetat se alege câte un nod care nu a fost vizitat încă și care are muchie cu unul dintre nodurile deja vizitate, această muchie fiind de cost minim. \\
+    1.Știm că  \textit{ ${}e_{1}$}= \textit{  ${}u_{1}$${}v_{1}$} și  \textit{ ${}e_{2}$}= \textit{  ${}u_{2}$${}v_{2}$}, unde  \textit{ ${}v_{1}$}, \textit{ ${}v_{2}$} $\notin$  \textit{ ${}V_{s}$} $\Rightarrow$ \textit{ ${}e_{1}$}, \textit{ ${}e_{2}$} $\notin$  \textit{ ${}T_{s}$} încă. \\
+    2. Dat fiind faptul că Algoritmul lui Prim tot alege noduri spre care costul muchiei este minim. După un anumit număr de iterații a buclei while, $\forall$ \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$}  $\in$ \textit{ ${}V_{s}$}, muchia \textit{e} de cost maxim de pe drumul de la  \textit{ ${}u_{1}$} la \textit{ ${}u_{2}$} va fi mai mică cel puțin decât costul unei muchii care pleacă din aceste două noduri spre un nod care $\notin$  \textit{ ${}V_{s}$} deoarece în timpul analizei costurilor muchiilor până în acel moment, am ales costul minim a unei muchii care pleacă dintr-un nod din \textit{ ${}V_{s}$} . Presupunem că  \textit{e}=\textit{ ${}u_{3}$}\textit{ ${}u_{4}$}, \textit{c(e)} poate fi mai mare decât \textit{ ${}c(e_{1})$} sau decât  \textit{ ${}c(e_{2})$} în cazul în care ultimul nod adăugat în  \textit{ ${}V_{s}$} a fost  \textit{ ${}u_{1}$} sau  \textit{ ${}u_{2}$}, neavând șansa să comparăm și costurile muchiilor care pleacă din ultimul nod adăugat. \\
+Din 1. + 2. $\Rightarrow$  \textit{ ${}c(e_{1}$)}> \textit{ c(e)} sau  \textit{ ${}c(e_{2}$)}> \textit{ c(e)}, unde  \textit{e} este o muchie de cost maxim din drumul de la i  \textit{ ${}u_{1}$} la i  \textit{ ${}u_{2}$} în \textit{ ${}T_{s}$},  \textit{ ${}u_{1}$}, \textit{ ${}u_{2}$} $\in$  \textit{ ${}V_{s}$}.
+
+\section*{Problema 4}
+\subsection*{4. (a)} 
+   Presupunem prin reducere la absurd că \textit{ ${}G^{'}$} este un digraf ciclic și are un circuit de forma  \textit{a-b-a}, unde \textit{a,b} $\in$ \textit{ ${}V( G^{'})$}. Așadar, pentru a avea acest circuit avem nevoie de muchia \textit{ab} și muchia \textit{ba}.\\
+   Conform definiției acoperirii prietenești, vom avea:\\
+1. muchia \textit{ab}  $\in$ \textit{ ${}E( G^{'})$} $\Leftrightarrow$ există drum direct de la a la b în \textit{G}\\
+2. muchia \textit{ba}  $\in$ \textit{ ${}E( G^{'})$} $\Leftrightarrow$ există drum direct de la b la a în \textit{G}\\
+Din 1. + 2. $\Rightarrow$  având drum de la a la b și de la b la a în \textit{G} avem un circuit de la a la a $\Rightarrow$ \textit{G} este un digraf ciclic, însă aceast rezultat este o contradicție pentru ipoteaza noastră.  $\Rightarrow$ acoperirea prietenească a unui digraf acicilic este tot un digraf aciclic. 
+
+\subsection*{4. (b)}
+   Știm că o mulțime stabilă este o mulțime formată din noduri neadiacente două câte două. \\ 
+   Demonstrăm că o submulțime de noduri \textit{S} $\subseteq$ \textit{V} este stabilă în  \textit{ ${}G^{'}$} $\Leftrightarrow$ este o adversitate în \textit{G} astfel: \\
+"$\Rightarrow$" :  Știm că \textit{S} este o mulțime stabilă în  \textit{ ${}G^{'}$} și arătăm că este o adversitate în \textit{G}. Dacă \textit{S} este o mulțime stabilă în \textit{ ${}G^{'}$}, atunci nu avem niciun arc de la un nod la alt nod, ambele fiind din \textit{S} $\Rightarrow$ nu avem drum direct între două noduri din  \textit{S} în digraful \textit{G} $\Rightarrow$  \textit{S} este o adversitate în \textit{G}. \\
+"$\Leftarrow$" :  Știm că \textit{S} este o adversitate în \textit{G} și arătăm că este o mulțime stabilă în  \textit{ ${}G^{'}$}. Dacă \textit{S} este o adversitate în \textit{G}, atunci nu avem niciun drum între oricare două noduri , ambele fiind din \textit{S} $\Rightarrow$ nu avem arc între două noduri din \textit{S} în digraful \textit{ ${}G^{'}$} $\Rightarrow$ \textit{S} este o mulțime stabilă în  \textit{ ${}G^{'}$}
+
+\subsection*{4. (c)}
+  Știm că un drum direct simplu este un drum în care arcele nu se repetă. 
+  Demonstrăm că un șir de noduri  \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } din \textit{V} formează un drum direct simplu în  \textit{ ${}G^{'}$}  $\Leftrightarrow$ nodurile se regăsesc (în această ordine, dar nu neapărat consecutive) pe un drum direct simplu în \textit{G} astfel: \\
+"$\Rightarrow$": Știm că \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } din \textit{V} formează un drum direct simplu în  \textit{ ${}G^{'}$} și arătăm că nodurile se regăsesc (în această ordine, dar nu neapărat consecutive) pe un drum direct simplu în \textit{G}. \\
+Fie: \\
+1. \textit{${}x_{1}$}\textit{${}x_{2}$} un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{1}$} la \textit{${}x_{2}$} în \textit{G}\\
+2. \textit{${}x_{2}$}\textit{${}x_{3}$}  un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{2}$} la \textit{${}x_{3}$} în \textit{G}\\
+.\\
+.\\
+.\\
+.\\
+p-1. \textit{${}x_{p-1}$}\textit{${}x_{p}$}  un arc în  \textit{ ${}G^{'}$}  $\Rightarrow$ există drum direct de la \textit{${}x_{p-1}$} la \textit{${}x_{p}$} în \textit{G}\\
+Din 1+2+...+(p-1) și știind că un drum direct de la un nod la alt nod în \textit{G} conține cel puțin două noduri $\Rightarrow$ există drum direct simplu de la \textit{${}x_{1}$} la \textit{${}x_{p}$} în \textit{G}
+de forma \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } (în această ordine, dar nu neapărat consecutive). \\
+"$\Leftarrow$": Știm că \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } (în această ordine, dar nu neapărat consecutive) este un drum direct simplu în \textit{G} și arătăm că  \textit{  ${}x_{1}$ ,  ${}x_{2}$ ... ${}x_{p}$ } formează un drum direct simplu în  \textit{ ${}G^{'}$}.  \\
+Fie:  \textit{  ${}x_{n}$ ,  ${}x_{m}$ , ${}x_{t}$ } o succesiune de noduri consecutive din drumul direct simplu dat  $\Rightarrow$ în  \textit{ ${}G^{'}$} vom avea: \\
+1. arcul \textit{  ${}x_{n}$${}x_{m}$} \\
+2. arcul \textit{  ${}x_{m}$${}x_{t}$} \\
+3.  arcul \textit{  ${}x_{n}$${}x_{t}$}   $\Rightarrow$ în \textit{ ${}G^{'}$} putem avea un drum direct simplu mai scurt de la  \textit{  ${}x_{n}$ la ${}x_{t}$}. \\
+$\Rightarrow$ în \textit{ ${}G^{'}$} putem avea un drum direct simplu mai scurt de  la \textit{  ${}x_{1}$ la ${}x_{p}$} decât cel din \textit{G}. 
+
+\subsection*{4. (d)}
+ Demonstrăm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri $\Leftrightarrow$ \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri astfel: \\
+"$\Rightarrow$": Știm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri și arătăm că \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri. Dacă \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri $\Rightarrow$ (folosindu-ne de punctul \textit{c)} ) Nodurile din cele cel  mult \textit{s} drumuri disjuncte din \textit{ ${}G^{'}$} se regăsesc (în această ordine, dar nu neapărat consecutive) în cel mult  \textit{s} drumuri din \textit{G} $\Rightarrow$ \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri. \\
+"$\Leftarrow$": Știm că \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri și arătăm că \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri. Dacă \textit{G} poate fi acoperit cu cel mult \textit{s} drumuri $\Rightarrow$  în \textit{ ${}G^{'}$} vom avea aceleași și toate drumurile din \textit{G} deoarece \textit{ ${}G^{'}$} se formează din \textit{G} și eventual se mai adaugă arce între nodurile între care există drum în \textit{G} $\Rightarrow$  \textit{ ${}G^{'}$} poate fi partiționat în cel mult \textit{s} drumuri disjuncte pe noduri. \\
+
+   
+\end{document}
