@@ -1,0 +1,63 @@
+ \documentclass[12pt] {fphw}
+%Compilarea se face pdfLaTeX+MakeIndex+BibTeX
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}  
+\usepackage{mathpazo}  
+\usepackage{graphicx}  
+\usepackage{booktabs} 
+\usepackage{listings}  
+\usepackage{enumerate}  
+\usepackage{subcaption}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+ 
+
+\title{Tema 3}  
+\author{Chirila Gabriela-Valentina 2A4, Ungurean Ana-Maria 2A4 } % Student name
+\date{5 Ianuarie 2023} % Due date
+\institute{Universitatea Alexandru Ioan-Cuza \\ Facultatea de Informatică} % Institute or school name
+\class{Algorimica Grafurilor} % Course or class name
+\professor{Lect dr. Olariu Florentin - Emanuel} % Professor or teacher in charge of the assignment
+
+\begin{document}
+
+\maketitle 
+
+\section*{Problema 1}
+\subsection*{1. (a)} 
+      Știm că \textit{M}, \textit{M'} sunt cuplaje $\Rightarrow$ sunt două mulțimi independente de muchii în \textit{G}, unde  \textit{M} $\subseteq$  \textit{E} și \textit{M'} $\subseteq$  \textit{E}, astfel încât $d_{M}$ (v) $\leq$ 1 și $d_{M'}$ (v') $\leq$ 1, $\forall$ v $\in$  \textit{S} și $\forall$ v' $\in$  \textit{T}, iar  \textit{S(M)}, \textit{S(M')} reprezintă mulțimea nodurilor saturate de M, respectiv M'. \\ 
+
+Fie \textit{G'}, graful parțial dat. Mulțimea de noduri \textit{S} $\cup$ \textit{T} reprezintă toate nodurile din \textit{G}, iar mulțimea de muchii \textit{M} $\cup$ \textit{M'} constituie reuniunea muchiilor din cele două cuplaje. \\
+Știm că \textit{G} este un graf bipartit $\Rightarrow$ $\forall$ m $\in$  \textit{E}, va fi incidentă cu un nod din mulțimea \textit{S} și cu un nod din mulțimea \textit{T}, cum \textit{M} $\cup$ \textit{M'} $\subseteq$  \textit{E} $\Rightarrow$ $\forall$ m $\in$ \textit{M} $\cup$ \textit{M'} va fi deasemenea incidentă cu un nod din mulțimea \textit{S} și cu un nod din mulțimea \textit{T}  $\Rightarrow$ nu există muchie între două noduri din \textit{S} sau din \textit{T} $\Rightarrow$ graful parțial \textit{G'} este un \textbf{graf bipartit}, a cărui componente conexe sunt la rândul lor \textbf{grafuri bipartite}. De asemenea, am observăt că în unele cazuri componenetele conexe pot fi formate dintr-un singur nod izolat atunci când în alegerea cuplajelor, nu a fost aleasă nicio muchie care să fie incidentă cu acest nod. 
+
+\subsection*{1. (b)} 
+   Din ipoteză știm că există două cuplaje \textit{M}, \textit{M'} astfel încât \textit{A} $\subseteq$ \textit{S(M)} și  \textit{B} $\subseteq$  \textit{S(M')}, unde \textit{A} $\subseteq$ \textit{S} și  \textit{B} $\subseteq$  \textit{T}. Iar, de la subpunctul a), am aflat că fiecare componentă conexă a grafului parțial dat G' este un graf biparit. \\
+
+Astfel, putem construi un cuplaj $M_{0}$ care să satureze toate nodurile din \textit{A} $\cup$ \textit{B}, prin alegerea muchiilor fie din cuplajul \textit{M}, fie din \textit{M'}, astfel încât muchiile nu să nu aibă noduri în comun. Pentru a ne asigura proprietatea cuplajului, în cazul în care avem două muchii care au în comun un nod, va fi nevoie să o alegem pe cea care are un nod în mulțimea  \textit{A}, iar celălalt din mulțimea \textit{B}. $\Rightarrow$  
+ \textit{A} $\cup$ \textit{B} $\subseteq$ \textit{S($M_{0}$)}, este inclus deoarece în momentul în care construim cuplajele  \textit{M}, \textit{M'} ne putem folosi de muchii care sunt incidente cu noduri care nu sunt nici din mulțimea \textit{A}, nici din mulțimea \textit{B}. 
+
+\section*{Problema 2}
+\subsection*{2. (a)} 
+   Știm că  \textit{$d_{G^{-}}$ (v)} reprezintă numărul de noduri care intră spre nodul \textit{v}, de asemenea definim o mulțime stabilă ca fiind o mulțime independență de noduri pentru care nu există nicio muchie între nodurile sale, iar $\chi$ constituie numărul cromatic, cea mai mică valoare a lui p, asfel încât există o p-colorare, unde  $\chi$ $\leq$ |\textit{G}|. \\
+
+     Fie \textit{x} și \textit{y}  două noduri, unde \textit{x} și \textit{y} $\in$ \textit{$V_{i}$}. Presupunem prin absurd că \textit{x} și \textit{y}  sunt adiacente în graful dat \textit{G}  $\Rightarrow$ în orientarea aciclică {$\vec{G}$}, fie \textit{x} fie \textit{y} va avea gradul interior cel puțin egal cu 1 ( {$d_{G'}^-$} (x) $\geq$ 1 || {$d_{G'}^-$} (y) $\geq$ 1)  $\Rightarrow$   urmărind definiția dată pentru clasele  $V_{i}$ ajungem la o contradicție ( definiția cere ca $\forall$ nod din clasă are gradul interior egal cu 1) $\Rightarrow$ $\forall$ două noduri din $V_{i}$ nu pot fi adiacente între ele $\Rightarrow$ pe baza definiției mulțimi stabile, ajungem la concluzia că toate clasele $V_{i}$ sunt mulțimi stabile în \textit{G}. \\
+
+     Presupunem prin absurd că \textit{p < $\chi$ (G)}, unde \textit{p= c({$\vec{G}$})+1}. Observăm că c({$\vec{G}$}) $\geq$ 1, deoarece cea mai mică valoare pe care o poate lua \textit{c} este 1, atunci când cel mai lung drum direct în {$\vec{G}$} este format dintr-un singur arc $\Rightarrow$  $\chi$ (G) $\geq$ 2 deorece cele două noduri care formează cel mai lung drum vor fi de culori diferite. Cum c({$\vec{G}$}) $\geq$ 1 și $\chi$ (G) $\geq$ 2 
+ $\Rightarrow$ c({$\vec{G}$}) + 1 < $\chi$ (G) contradicție $\Rightarrow$  \textit{p $\geq$ $\chi$ (G)}. 
+ 
+\subsection*{2. (b)} 
+        Pornind de la o colorare optimă a nodurilor din \textit{G}, se formează un număr de $\chi$ (G) mulțimi stabile. Construim orientarea acicilică astfel: căutăm subgraful complet cu un număr maxim de noduri, alegem aleatoriu un nod din acel subraf și punem orientarea muchiilor incidente cu el către acel nod, apoi alegem alt nod și procedăm la fel cu muchiile incidente cu acesta a căror orientare nu a fost aleasă încă, repetăm acest pas până când toate muchiile din acel subgraf complet au o orientare. Cu celălalte muchii care nu fac parte din subgraful complet, vom proceda astfel: nodurile incidente cu acestea fie au gradul interior 0, fie au gradul exterior 0. Astfel, ne asigurăm că cel mai lung drum din orientarea aciclică respectă proprietatea ca {$\vec{G}$}, $\chi$ (G) $\leq$  c({$\vec{G}$}) + 1 fiind format din toate nodurile din subgraful complet maxim găsit anterior. Fie \textit{n}, numărul de noduri din subgraful menționat, știm că \textit{n} $\leq$ $\chi$ (G) | -1    $\Rightarrow$  \textit{n} - 1 $\leq$ $\chi$ (G) - 1, cum  \textit{n} - 1  reprezintă c({$\vec{G}$}) $\Rightarrow$ c({$\vec{G}$}) $\leq$ $\chi$ (G) - 1 | +1 $\Rightarrow$  c({$\vec{G}$}) + 1 $\leq$ $\chi$ (G) - 1 $\Rightarrow$ există o orientare aciclică {$\vec{G}$} astfel încât $\chi$ (G) $\geq$  c({$\vec{G}$}) + 1. \\ 
+   
+             De la subpunctul a) știm că c({$\vec{G}$}) + 1 $\geq$ $\chi$ (G), iar anterior am demonstrat că există o orientare aciclică {$\vec{G}$} astfel încât $\chi$ (G)  $\geq$ c({$\vec{G}$}) + 1 $\Rightarrow$ această orientare aciclică {$\vec{G}$} are proprietatea ca $\chi$ (G) = c({$\vec{G}$}) + 1, deoarece  c({$\vec{G}$}) este valoarea minimă pe care o poate lua c({$\vec{G}$}) atunci când construim orientarea aciclică urmărind pașii enunțați ulterior. 
+
+
+
+
+ 
+
+ 
+
+
+
+   
+\end{document}
